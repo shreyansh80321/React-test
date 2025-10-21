@@ -5,7 +5,7 @@ import { ShoppingCartContext } from '../../context';
 function ProductDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { productDetails, setProductDetails, handleAddToCart } =
+  const { productDetails, setProductDetails, handleAddToCart,cartItem } =
     useContext(ShoppingCartContext);
   // console.log(params);
   async function getProductDeatils() {
@@ -53,8 +53,9 @@ function ProductDetailsPage() {
           </div>
           <div>
             <button
+              disabled={cartItem.findIndex(item=>item?.id===productDetails?.id)>-1}
               onClick={() => handleAddToCart(productDetails)}
-              className="bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
+              className="disabled:opacity-65 bg-blue-600 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
             >
               Add To Cart
             </button>
